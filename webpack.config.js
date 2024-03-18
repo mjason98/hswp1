@@ -5,6 +5,8 @@ const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
+const CompressionPlugin = require("compression-webpack-plugin");
+
 module.exports = {
   mode: "production",
   entry: "./src/js/main.js", // Adjust if your entry file is different
@@ -14,13 +16,22 @@ module.exports = {
   },
   module: {
     rules: [
-      { 
-        test: /\.css$/, 
-        use: [MiniCssExtractPlugin.loader, "css-loader"] // Extract CSS into separate files
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"], // Extract CSS into separate files
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/,
-        type: "asset/resource",
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        use: [
+          {
+            loader: "image-webpack-loader",
+            options: {
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ],
       },
     ],
   },
@@ -54,9 +65,15 @@ module.exports = {
     }),
 
     new CopyPlugin({
-      patterns: [
-        { from: "src/img", to: "img" },
-      ],
+      patterns: [{ from: "src/img", to: "img" }],
+    }),
+
+    new CompressionPlugin({
+      filename: "[path][base].gz",
+      algorithm: "gzip",
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ],
   optimization: {
@@ -64,7 +81,7 @@ module.exports = {
     minimize: true,
     minimizer: [new CssMinimizerPlugin()],
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
     },
   },
 };
