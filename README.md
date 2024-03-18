@@ -11,3 +11,26 @@ This is Harbour Space's first web performance task. It uses the [shop template](
 * File compression: Added a pluging to compress the files to gz. see the `webpack.config.js` file.
 
 * Async: Async was enabled for external js: `<script src="https:..." async></script>`
+
+## Dev Rub and Build
+
+to download this repo and install all dependencies:
+```shell
+git clone https://github.com/mjason98/hswp1.git
+cd hswp1
+npm install
+```
+
+to run the development server run:
+
+```shell
+npm start
+```
+
+### Build 
+
+to build for production, and generate bundles run the following command:
+
+```shell
+npm run build
+```
