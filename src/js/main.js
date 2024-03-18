@@ -1,11 +1,12 @@
-import('./owlcarousel/owl.carousel.js');
-
 import(/* webpackChunkName: "style" */ '../css/style.css');
-import(/* webpackChunkName: "animate" */ '../js/animate/animate.min.css');
-import(/* webpackChunkName: "owlcarousel" */ '../js/owlcarousel/assets/owl.carousel.css');
+import(/* webpackChunkName: "animate" */ './animate/animate.min.css');
+import(/* webpackChunkName: "owlcarousel" */ './owlcarousel/assets/owl.carousel.css');
 
+import('./easing/easing.js');
+import('./mail/contact.js');
+import('./mail/jqBootstrapValidation.min.js');
 
-
+import('./owlcarousel/owl.carousel.js').then(()=>{
 
 (function ($) {
     "use strict";
@@ -94,7 +95,6 @@ import(/* webpackChunkName: "owlcarousel" */ '../js/owlcarousel/assets/owl.carou
 
     // Product Quantity
     $('.quantity button').on('click', function () {
-        console.log("Button clicked");
         var button = $(this);
         var oldValue = button.parent().parent().find('input').val();
         if (button.hasClass('btn-plus')) {
@@ -111,3 +111,4 @@ import(/* webpackChunkName: "owlcarousel" */ '../js/owlcarousel/assets/owl.carou
     
 })(jQuery);
 
+});

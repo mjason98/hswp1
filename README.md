@@ -8,6 +8,6 @@ This is Harbour Space's first web performance task. It uses the [shop template](
 
 * Minification: CSS minification has been applied. Its configuration can be found in the `webpack.config.js` file.
 
-* Image compression: [all]
+* File compression: Added a pluging to compress the files to gz. see the `webpack.config.js` file.
 
 * Async: Async was enabled for external js: `<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>`

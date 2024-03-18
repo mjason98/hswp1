@@ -22,20 +22,12 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        use: [
-          {
-            loader: "image-webpack-loader",
-            options: {
-              webp: {
-                quality: 75,
-              },
-            },
-          },
-        ],
+        type: "asset/resource",
       },
     ],
   },
   plugins: [
+    
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
@@ -83,5 +75,8 @@ module.exports = {
     splitChunks: {
       chunks: "all",
     },
+  },
+  externals: {
+    jquery: 'jQuery',
   },
 };
