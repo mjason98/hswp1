@@ -1,8 +1,11 @@
-import $ from 'jquery';
+import('./owlcarousel/owl.carousel.js');
 
 import(/* webpackChunkName: "style" */ '../css/style.css');
 import(/* webpackChunkName: "animate" */ '../js/animate/animate.min.css');
 import(/* webpackChunkName: "owlcarousel" */ '../js/owlcarousel/assets/owl.carousel.css');
+
+
+
 
 (function ($) {
     "use strict";

@@ -2,28 +2,32 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: "./src/js/main.js", // Adjust if your entry file is different
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
-      { test: /\.css$/, use: ["style-loader", "css-loader"] },
+      { 
+        test: /\.css$/, 
+        use: [MiniCssExtractPlugin.loader, "css-loader"] // Extract CSS into separate files
+      },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: "asset/resource",
       },
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html", // This is the default value, but it's good to be explicit
@@ -55,4 +59,12 @@ module.exports = {
       ],
     }),
   ],
+  optimization: {
+    usedExports: true,
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin()],
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 };
