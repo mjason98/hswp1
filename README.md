@@ -12,7 +12,7 @@ This is Harbour Space's first web performance task. It uses the [shop template](
 
 * Async: Async was enabled for external js: `<script src="https:..." async></script>`
 
-## Dev Rub and Build
+## Dev Run and Build
 
 to download this repo and install all dependencies:
 ```shell
